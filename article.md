@@ -76,7 +76,8 @@ runNTrials(nTrials, nTeams, nYears)
 
 This prints
 
-```30 teams playing for 86 years
+```
+30 teams playing for 86 years
 83.89% of seasons didn't have every team win over 10000 trials
 ```
 
