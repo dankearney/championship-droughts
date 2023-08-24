@@ -39,13 +39,13 @@ $N_{losers} = N_{1 \hspace{.25em} loser} - (N_{2 \hspace{.25em} losers} - (N_{3 
 
 This goes on until we hit bottom. There are exactly 30 ways we can have 29 teams all be losers (each team wins 86 times straight!). And there are 0 ways that all 30 teams can lose (someone has to win). 
 
-Now, what is $N_{i \hspace{.25em} loser}$? It is the number of ways exactly $i$ teams win a World Series. There are two parts to this. First, we need to pick our teams that win. There are ${30 \choose i}$ ways to combine 30 teams into $i$ groups, and once we've selected them, each combination can then have $\frac{30-i}{29}^{86}$ ways that the other teams can win. As an example, if $i=2$, there ${30 \choose 2} * (\frac{28}{30}^{86})$ ways. We can write this out as a neat little summation. Note that the sign alternates due to the nested subtractions:
+Now, what is $N_{i \hspace{.25em} loser}$? It is the number of ways exactly $i$ teams win a World Series. There are two parts to this. First, we need to pick our teams that win. There are ${30 \choose i}$ ways to combine 30 teams into $i$ groups, and once we've selected them, each combination can then have $(30-i)^{86}$ ways that the other teams can win. As an example, if $i=2$, there ${30 \choose 2} * (28^{86})$ ways. We can write this out as a neat little summation. Note that the sign alternates due to the nested subtractions:
 
-$N = \Sigma_{i=1}^{30} {-1}^{i+1}{30 \choose i}\frac{30-i}{30}$
+$N = \Sigma_{i=1}^{30} {-1}^{i+1}{30 \choose i}(30-i)^{86}$
 
-Then converting to a probability, we can compute the answer:
+Then converting to a probability by dividing by the total number of possible outcomes, we can compute the answer:
 
-$P = \frac{1}{30^{86}} \Sigma_{i=1}^{30} {-1}^{i+1} {30 \choose i}\frac{30-i}{30} = .839775$
+$P = \frac{1}{30^{86}} \Sigma_{i=1}^{30} {-1}^{i+1}{30 \choose i}(30-i)^{86} = .839775$
 
 ## Verifying with Python
 
