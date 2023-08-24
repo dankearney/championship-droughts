@@ -23,7 +23,7 @@ But what is the probability that 86 years go by and there's a drought in the lea
 
 On the surface, this feels like a variation on the previous question. Take a minute to think it through. Can you come up with a quick way to solve this? 
 
-The main challenge is that in some of the seasons where Team 1 doesn't win, another team might _also_ not win. If we take the naive route and simply add the probabilities of each team individually being a loser, we're double-counting the overlapping cases where multiple teams don't win at the same time. So, we need to remove those overlaps.
+The main challenge is that in some of the cases where one team doesn't win, another team might _also_ not win. If we take the naive route and simply add the probabilities of each team individually being a loser, we're double-counting the overlapping cases where multiple teams don't win at the same time. So, we need to remove those overlaps.
 
 So, the number of possibilities where there's at least one loser is:
 
