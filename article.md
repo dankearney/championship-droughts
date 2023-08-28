@@ -15,31 +15,25 @@ Okay, so on to the statistics.
 
 ## The statistics
 
-Let's start with a simple question. In the span of 86 years, what is the probability that a specific team out of the 30 in baseball -- let's call them the Boston Braves -- doesn't win a championship in 86 years?
+The question at hand asks what the probability is that 86 years go by and there are team(s) with a championship drought? That is, at least one team is still a loser after 86 years.
 
-This one is actually pretty easy: in year 1, there are 29 other teams that can win, so there are 29 ways that the Braves don't win. In year 2, again, any of the 29 teams can win, so there are 29*29 ways that, over 2 years, the Braves don't win. Over 86 years, there are $29^{86}$ ways. Out of a possible of $30^{86}$ total ways the 86 years can go, that gives a $\frac{29^{86}}{30^{86}}$, or ~5% probability of the Braves not winning the World Series. 
+It's simple enough to answer a more specific question, like a specific team having a drought, or any one team having a drought. The main challenge is that in some of the cases where one team has a drought, another team might _also_ have a drought. If we take the naive route and simply add the probabilities of each team individually being in a drought, we're double-counting the overlapping cases where multiple teams have droughts at the same time. So, we need to remove those overlaps.
 
-But what is the probability that 86 years go by and there's a drought in the league at all? That is, at least one team is still a loser after 86 years.
+The number of possibilities where there's at least one drought is:
 
-On the surface, this feels like a variation on the previous question. Take a minute to think it through. Can you come up with a quick way to solve this? 
+$N_{losers} = N_{1 \hspace{.25em} drought} - N_{overlaps}$
 
-The main challenge is that in some of the cases where one team doesn't win, another team might _also_ not win. If we take the naive route and simply add the probabilities of each team individually being a loser, we're double-counting the overlapping cases where multiple teams don't win at the same time. So, we need to remove those overlaps.
+We can compute the overlapping scenarios one step at a time. First, we can compute all the ways that exactly 2 teams have droughts and add those together, and we're left with another overlap, which consists of all the times there are 3+ teams with droughts. 
 
-So, the number of possibilities where there's at least one loser is:
-
-$N_{losers} = N_{1 \hspace{.25em} loser} - N_{overlaps}$
-
-We can compute the overlapping scenarios one step at a time. First, we can compute all the ways that exactly 2 teams win and add those together, and we're left with another overlap, which consists of all the times there are 3+ teams that all don't win. 
-
-$N_{losers} = N_{1 \hspace{.25em} loser} - (N_{2 \hspace{.25em} losers} - N_{overlaps})$
+$N_{losers} = N_{1 \hspace{.25em} drought} - (N_{2 \hspace{.25em} droughts} - N_{overlaps})$
 
 Rinse and repeat -- compute the number of ways there are three losers, then subtract the overlap..
 
-$N_{losers} = N_{1 \hspace{.25em} loser} - (N_{2 \hspace{.25em} losers} - (N_{3 \hspace{.25em} losers} - N_{overlaps}))$
+$N_{droughts} = N_{1 \hspace{.25em} drought} - (N_{2 \hspace{.25em} droughts} - (N_{3 \hspace{.25em} droughts} - N_{overlaps}))$
 
 This goes on until we hit bottom. There are exactly 30 ways we can have 29 teams all be losers (each team wins 86 times straight!). And there are 0 ways that all 30 teams can lose (someone has to win). 
 
-Now, what is $N_{i \hspace{.25em} loser}$? It is the number of ways exactly $i$ teams win a World Series. There are two parts to this. First, we need to pick our teams that win. There are ${30 \choose i}$ ways to combine 30 teams into $i$ groups, and once we've selected them, each combination can then have $(30-i)^{86}$ ways that the other teams can win. As an example, if $i=2$, there ${30 \choose 2} * (28^{86})$ ways. We can write this out as a neat little summation. Note that the sign alternates due to the nested subtractions:
+Now, what is $N_{i \hspace{.25em} droughts}$? It is the number of ways exactly $i$ have a drought. There are two parts to this. First, we need to pick our teams. There are ${30 \choose i}$ ways to combine 30 teams into $i$ groups, and once we've selected them, each combination can then have $(30-i)^{86}$ ways that all the other teams can win. As an example, if $i=2$, there ${30 \choose 2} * (28^{86})$ ways. We can write this out as a neat little summation. Note that the sign alternates due to the nested subtractions:
 
 $N = \Sigma_{i=1}^{30} {-1}^{i+1}{30 \choose i}(30-i)^{86}$
 
