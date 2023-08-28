@@ -17,7 +17,7 @@ Okay, so on to the statistics.
 
 The question at hand asks what the probability is that 86 years go by and there is a team (or multiple) in a championship drought? 
 
-It's simple enough to answer a more specific question, like a specific team having a drought, or any one team having a drought. The main challenge is that in some of the cases where one team has a drought, another team might _also_ have a drought. If we take the naive route and simply add the ways each team individually could be in a drought, we're double-counting the overlapping cases where multiple teams have droughts at the same time. So, we need to remove those overlaps.
+It's simple enough to answer a more specific question, like a specific team having a drought, or exactly one team having a drought. The main challenge is that in some of the cases where one team has a drought, another team might _also_ have a drought. If we take the naive route and simply add the ways each team individually could be in a drought, we're double-counting the overlapping cases where multiple teams have droughts at the same time. So, we need to remove those overlaps.
 
 The number of possibilities where there's at least one drought is:
 
@@ -25,7 +25,7 @@ $N_{droughts} = N_{1 \hspace{.25em} drought} - N_{overlaps}$
 
 We can compute the overlapping scenarios one step at a time. First, we can compute all the ways that exactly 2 teams have droughts and add those together, and we're left with another overlap, which consists of all the times there are 3+ teams with droughts. 
 
-$N_{losers} = N_{1 \hspace{.25em} drought} - (N_{2 \hspace{.25em} droughts} - N_{overlaps})$
+$N_{droughts} = N_{1 \hspace{.25em} drought} - (N_{2 \hspace{.25em} droughts} - N_{overlaps})$
 
 Rinse and repeat -- compute the number of ways there are three losers, then subtract the overlap..
 
