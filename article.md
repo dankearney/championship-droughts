@@ -9,19 +9,19 @@ The Boston Red Sox went 86 years without winning baseball's World Series. The Ch
 
 I got curious: what is the probability of such a drought? This question turned out to be more interesting than I expected!
 
-A few ways to simplify things: let's assume that a champion is picked randomly from the set of teams playing each year. This is a wild oversimplification, but, whatever. The second assumption is that I'm just going to assume that the same X teams have been in the league for the same amount of time. This isn't true either -- leagues grow and shrink, teams change -- but it simplifies the math as well. 
+A few ways to simplify things: let's assume that a champion is picked randomly from the set of teams playing each year. The second assumption is that I'm just going to assume that the same X teams have been in the league for the same amount of time. This isn't true either -- leagues grow and shrink, teams change -- but it simplifies the math as well. 
 
 Okay, so on to the statistics. 
 
 ## The statistics
 
-The question at hand asks what the probability is that 86 years go by and there are team(s) with a championship drought? That is, at least one team is still a loser after 86 years.
+The question at hand asks what the probability is that 86 years go by and there is a team (or multiple) in a championship drought? 
 
-It's simple enough to answer a more specific question, like a specific team having a drought, or any one team having a drought. The main challenge is that in some of the cases where one team has a drought, another team might _also_ have a drought. If we take the naive route and simply add the probabilities of each team individually being in a drought, we're double-counting the overlapping cases where multiple teams have droughts at the same time. So, we need to remove those overlaps.
+It's simple enough to answer a more specific question, like a specific team having a drought, or any one team having a drought. The main challenge is that in some of the cases where one team has a drought, another team might _also_ have a drought. If we take the naive route and simply add the ways each team individually could be in a drought, we're double-counting the overlapping cases where multiple teams have droughts at the same time. So, we need to remove those overlaps.
 
 The number of possibilities where there's at least one drought is:
 
-$N_{losers} = N_{1 \hspace{.25em} drought} - N_{overlaps}$
+$N_{droughts} = N_{1 \hspace{.25em} drought} - N_{overlaps}$
 
 We can compute the overlapping scenarios one step at a time. First, we can compute all the ways that exactly 2 teams have droughts and add those together, and we're left with another overlap, which consists of all the times there are 3+ teams with droughts. 
 
@@ -31,7 +31,7 @@ Rinse and repeat -- compute the number of ways there are three losers, then subt
 
 $N_{droughts} = N_{1 \hspace{.25em} drought} - (N_{2 \hspace{.25em} droughts} - (N_{3 \hspace{.25em} droughts} - N_{overlaps}))$
 
-This goes on until we hit bottom. There are exactly 30 ways we can have 29 teams all be losers (each team wins 86 times straight!). And there are 0 ways that all 30 teams can lose (someone has to win). 
+This goes on until we hit bottom. There are exactly 30 ways we can have 29 teams with droughts (each team wins 86 times straight!). And there are 0 ways that all 30 teams can be in a drought (someone has to win). 
 
 Now, what is $N_{i \hspace{.25em} droughts}$? It is the number of ways exactly $i$ have a drought. There are two parts to this. First, we need to pick our teams. There are ${30 \choose i}$ ways to combine 30 teams into $i$ groups, and once we've selected them, each combination can then have $(30-i)^{86}$ ways that all the other teams can win. As an example, if $i=2$, there ${30 \choose 2} * (28^{86})$ ways. We can write this out as a neat little summation. Note that the sign alternates due to the nested subtractions:
 
